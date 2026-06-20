@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenHarvest | Fresh From Farm to Your Table</title>
+  <meta name="description" content="GreenHarvest connects you directly with local farmers for fresh, organic fruits, vegetables, and leafy greens delivered to your doorstep.">
+
+  <meta name="theme-color" content="#2e7d32">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-hero);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: white;
+      padding: 0 5%;
+    }
+
+    /* Animated floating shapes in hero */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.08;
+      animation: floating 6s ease-in-out infinite;
+    }
+    .hero::before {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #66bb6a, transparent);
+      top: -100px;
+      right: -100px;
+    }
+    .hero::after {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #ff9800, transparent);
+      bottom: -80px;
+      left: -80px;
+      animation-delay: 3s;
+    }
+
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      animation: particleFloat 10s ease-in-out infinite;
+    }
+    .particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; font-size: 2.5rem; }
+    .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; font-size: 1.8rem; }
+    .particle:nth-child(3) { top: 40%; left: 50%; animation-delay: 4s; font-size: 2.2rem; }
+    .particle:nth-child(4) { top: 80%; left: 30%; animation-delay: 1s; font-size: 1.5rem; }
+    .particle:nth-child(5) { top: 15%; left: 70%; animation-delay: 3s; font-size: 2rem; }
+    .particle:nth-child(6) { top: 50%; left: 20%; animation-delay: 5s; font-size: 1.6rem; }
+    .particle:nth-child(7) { top: 70%; left: 60%; animation-delay: 2.5s; font-size: 2.3rem; }
+    .particle:nth-child(8) { top: 30%; left: 90%; animation-delay: 4.5s; font-size: 1.4rem; }
+
+    .hero-content {
+      max-width: 650px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: #00e676;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .hero h1 {
+      font-size: 4.2rem;
+      margin-bottom: 20px;
+      line-height: 1.08;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: -1px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, #ffc107, #ff9800, #ff6b35);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 36px;
+      opacity: 0.9;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-buttons .btn {
+      font-size: 1.05rem;
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #ff9800, #ff6b35);
+      color: white;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      animation: shimmer 3s infinite;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 8px 30px rgba(255,107,53,0.4);
+    }
+    .btn-hero-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(5px);
+    }
+    .btn-hero-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat .number {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #ffc107, #ff6b35);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-stat .label {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    /* ===== MARQUEE BANNER ===== */
+    .marquee-banner {
+      background: var(--gradient-primary);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .marquee-track span {
+      display: inline-block;
+      padding: 0 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== SECTION STYLES ===== */
+    .section {
+      padding: 100px 5%;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+    .section-label {
+      display: inline-block;
+      background: rgba(46,125,50,0.1);
+      color: var(--primary-color);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-color);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ===== FEATURES GRID ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      padding: 36px 28px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-lg);
+    }
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    .feature-card:nth-child(2)::before { background: var(--gradient-warm); }
+    .feature-card:nth-child(3)::before { background: linear-gradient(135deg, var(--accent-pink), #f06292); }
+    .feature-card:nth-child(4)::before { background: linear-gradient(135deg, var(--accent-purple), #ba68c8); }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 20px;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .feature-icon.green-bg { background: rgba(46,125,50,0.1); }
+    .feature-icon.orange-bg { background: rgba(255,152,0,0.1); }
+    .feature-icon.pink-bg { background: rgba(233,30,99,0.1); }
+    .feature-icon.purple-bg { background: rgba(156,39,176,0.1); }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* ===== CATEGORIES ===== */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+    .category-img-wrap {
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+    .category-img {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+    .category-card:hover .category-img {
+      transform: scale(1.12);
+    }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+      transition: opacity 0.3s;
+    }
+    .category-emoji {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .category-card:hover .category-emoji {
+      transform: rotate(15deg) scale(1.1);
+    }
+    .category-content {
+      padding: 24px;
+      position: relative;
+    }
+    .category-content h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 8px;
+    }
+    .category-content p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .category-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: gap 0.3s;
+    }
+    .category-link:hover {
+      gap: 14px;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-section {
+      background: var(--gradient-hero);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      padding: 70px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      text-align: center;
+      color: white;
+    }
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 45px;
+      left: 15%;
+      right: 15%;
+      height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 3px;
+      z-index: 0;
+    }
+    .step-card {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .step-number {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 auto 24px;
+      font-family: 'Outfit', sans-serif;
+      transition: transform 0.3s;
+    }
+    .step-card:hover .step-number {
+      transform: scale(1.1);
+    }
+    .step-number.green { background: rgba(46,125,50,0.12); color: var(--primary-color); }
+    .step-number.orange { background: rgba(255,152,0,0.12); color: #ff9800; }
+    .step-number.pink { background: rgba(233,30,99,0.12); color: #e91e63; }
+
+    .step-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+    .step-card p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* ===== REVIEWS ===== */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background: var(--card-bg);
+      padding: 36px 30px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .review-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--primary-color);
+      opacity: 0.15;
+      font-family: Georgia, serif;
+    }
+    .review-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+    .user-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      border: 3px solid var(--primary-light);
+      padding: 2px;
+    }
+    .stars {
+      color: #ffc107;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+    .review-card p {
+      font-style: italic;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .review-card strong {
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 100px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 70px 50px;
+      border-radius: var(--radius-xl);
+      background: var(--gradient-hero);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.08), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255,152,0,0.1), transparent 40%);
+    }
+    .cta-card h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-card p {
+      font-size: 1.15rem;
+      opacity: 0.9;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+      .hero-stats { gap: 20px; }
+      .hero-stat .number { font-size: 1.5rem; }
+      .features-grid, .categories-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .stats-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid::before { display: none; }
+      .section-title { font-size: 2rem; }
+      .cta-card { padding: 40px 24px; }
+      .cta-card h2 { font-size: 1.8rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { width: 100%; text-align: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+aaaa
+.fresh-box{
+    width:500px;
+    max-width:90%;
+    margin:auto;
+    padding:30px 20px;
+    background:#fff;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.fresh-box h2{
+    font-size:30px;
+    margin-bottom:15px;
+    color:#e1e6e1;
+}
+
+.fresh-box p{
+    font-size:15px;
+    line-height:1.7;
+    color:#fdfffd;
+    margin-bottom:20px;
+}
+
+.fresh-features{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.fresh-features span{
+    padding:8px 15px;
+    background:#f1f8e9;
+    border-radius:30px;
+    font-size:14px;
+    color:#2e7d32;
+}
+
+@media(max-width:768px){
+    .fresh-box{
+        width:95%;
+        padding:25px 15px;
+    }
+
+    .fresh-box h2{
+        font-size:24px;
+    }
+}
+.fresh-box{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.fresh-icon{
+    font-size:70px;
+    flex-shrink:0;
+}
+
+.fresh-content{
+    text-align:left;
+}
+
+.fresh-content h2{
+    margin:0 0 8px;
+    font-size:32px;
+    color:#fff;
+}
+
+.fresh-content p{
+    margin:0;
+    color:#f5f5f5;
+    font-size:16px;
+}
+.fresh-icon{
+    font-size:70px;
+}
+.fresh-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* space between spans */
+    margin-top: 40px;
+}
+
+.fresh-features span {
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border-radius: 20px;
+} 
+.fresh-features span::before {
+    content: "➜";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    margin-right: 8px;
+    font-size: 12px;
+}
+/* ====================================
+   📱 Mobile Phones (320px - 480px)
+==================================== */
+@media screen and (max-width:480px){
+
+  .hero{
+    padding:100px 20px 50px;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .hero p{
+    font-size:1rem;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+  }
+
+  .hero-buttons .btn{
+    width:100%;
+  }
+
+  .hero-stats{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+  }
+
+  .section-title{
+    font-size:1.8rem;
+  }
+
+  .features-grid,
+  .categories-grid,
+  .reviews-grid{
+    grid-template-columns:1fr;
+  }
+
+  .steps-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .fresh-box{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .fresh-content{
+    text-align:center;
+  }
+
+  .fresh-icon{
+    font-size:60px;
+  }
+
+  .footer-content{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+}
+
+/* ====================================
+   📱 Large Mobiles (481px - 768px)
+==================================== */
+@media screen and (min-width:481px) and (max-width:768px){
+
+  .hero{
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:2.6rem;
+  }
+
+  .hero-stats{
+    justify-content:center;
+  }
+
+  .features-grid,
+  .categories-grid,
+  .reviews-grid{
+    grid-template-columns:1fr;
+  }
+
+  .steps-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .fresh-box{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .fresh-content{
+    text-align:center;
+  }
+}
+
+/* ====================================
+   💻 Tablets (769px - 992px)
+==================================== */
+@media screen and (min-width:769px) and (max-width:992px){
+
+  .hero h1{
+    font-size:3rem;
+  }
+
+  .features-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .categories-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .reviews-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .steps-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* ====================================
+   🖥️ Desktop (993px+)
+==================================== */
+@media screen and (min-width:993px){
+
+  .features-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .categories-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .reviews-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .steps-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+/* ===== Navbar ===== */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 5%;
+    position:relative;
+    flex-wrap:nowrap; 
+}
+
+.nav-brand{
+    display:flex;
+    align-items:center;
+        white-space:nowrap;
+    flex-shrink:0;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text-color);
+    font-weight:500;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+     flex-wrap:nowrap;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.hamburger{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* ===== Mobile ===== */
+@media(max-width:768px){
+
+    .navbar{
+        padding:15px 20px;
+    }
+
+    .hamburger{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:var(--card-bg);
+        flex-direction:column;
+        gap:15px;
+        padding:20px 0;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        z-index:1000;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .nav-actions{
+        gap:10px;
+    }
+
+    .btn{
+        padding:8px 15px;
+        font-size:14px;
+    }
+}
+/* Desktop */
+.nav-links{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .hamburger{
+        display:block;
+        font-size:30px;
+        cursor:pointer;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#fff;
+        flex-direction:column;
+        text-align:center;
+        padding:20px 0;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        z-index:999;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width:769px){
+    .hamburger{
+        display:none;
+    }
+}
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:60px;
+  padding:80px 5%;
+  background:#1f7a3a; /* green background like your image */
+  color:white;
+}
+
+/* LEFT SIDE */
+.hero-content{
+  flex:1;
+  max-width:600px;
+}
+
+.hero-content h1{
+  font-size:3rem;
+  font-weight:800;
+  line-height:1.2;
+}
+
+.gradient-text{
+  color:#ffb300;
+}
+
+/* RIGHT IMAGE BOX */
+.hero-image{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+.hero-image img{
+  width:100%;
+  max-width:420px;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  border:4px solid rgba(255,255,255,0.2);
+}
+
+/* BUTTONS */
+.hero-buttons{
+  margin-top:25px;
+  display:flex;
+  gap:15px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .hero-image img{
+    max-width:90%;
+  }
+}
+.hero-slider{
+  flex:1;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-slider img{
+  width:150%;
+  height: 500px;
+  max-width:450px;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  position:absolute;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
+}
+
+.hero-slider img.active{
+  opacity:1;
+  position:relative;
+}
+.nav-brand h2{
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+@media (max-width:768px){
+    .nav-brand h2{
+        font-size: 1.1rem;  /* 20px on mobile */
+    }
+}
+.nav-brand h2{
+    font-size: 1.4rem;   /* Small size */
+    font-weight: 200;
+    margin: 0;
+}
+
+.logo-icon{
+    font-size: 1rem;   /* Small icon */
+}
+body.dark-mode{
+    background-color:#121212;
+    color:rgb(32, 148, 17);
+}
+
+body.dark-mode .navbar{
+    background-color:#1e1e1e;
+}
+
+body.dark-mode .nav-links a{
+    color:rgb(54, 196, 11);
+}
+
+body.dark-mode .dashboard-container{
+    background-color:#121212;
+}
+.offer-box {
+  width: 100%;
+  background: linear-gradient(90deg, #1b5e20, #2e7d32);
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.offer-marquee span {
+  margin-right: 40px;   /* 👈 space between items */
+  font-weight: bold;
+}
+@keyframes moveRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  background: #1b5e20;
+  padding: 10px 0;
+}
+
+/* LEFT COLOR FADE */
+.marquee::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to right, #ff9800, transparent);
+  z-index: 2;
+}
+.track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+
+  /* 👇 RIGHT MOVE */
+  animation: scrollRight 20s linear infinite;
+}
+
+.track span {
+  color: white;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* 👉 RIGHT DIRECTION ANIMATION */
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+<nav class="navbar glass">
+    <div class="nav-brand">
+        <h2>🌾 GreenHarvest</h2>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="vegetables.html">Vegetables</a></li>
+        <li><a href="fruits.html">Fruits</a></li>
+        <li><a href="leafygreens.html">Leafy Greens</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider">🌙</span>
+        </label>
+
+        <a href="login.html" class="btn btn-primary">Login</a>
+
+        <div class="hamburger" id="hamburger">☰</div>
+    </div>
+</nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-particles">
+      <span class="particle">🍅</span>
+      <span class="particle">🥕</span>
+      <span class="particle">🌿</span>
+      <span class="particle">🍋</span>
+      <span class="particle">🥬</span>
+      <span class="particle">🍊</span>
+      <span class="particle">🌽</span>
+      <span class="particle">🫑</span>
+    </div>
+    <div class="hero-content animate-slide-up">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Farm Fresh • 100% Organic
+      </div>
+      <h1>Fresh From <span class="gradient-text">Farm</span> to Your Table</h1>
+      <p>Skip the middlemen. Get the freshest organic fruits, vegetables and leafy greens delivered straight from verified local farmers to your doorstep.</p>
+      <div class="hero-buttons">
+        <a href="vegetables.html" class="btn btn-glow">🛒 Shop Now</a>
+        <a href="register.html?type=farmer" class="btn btn-hero-outline">👨‍🌾 Become a Seller</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number" data-target="500">500+</div>
+          <div class="label">Local Farmers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number" data-target="10000">10K+</div>
+          <div class="label">Happy Customers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number" data-target="200">200+</div>
+          <div class="label">Products</div>
+        </div>
+      </div>
+    </div>
+   <!-- RIGHT SIDE IMAGE SLIDER -->
+<div class="hero-slider">
+ <img class="slide " src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?auto=format&fit=crop&w=900&q=80">
+  <img class="slide " src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900">
+  <img class="slide " src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=900">
+  <img class="slide" src="https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&w=900&q=80">
+</div>
+  </div>
+
+  </header>
+
+  <!-- Scrolling Marquee -->
+  <div class="marquee-banner">
+    <div class="marquee-track">
+      <span>🍅 Fresh Tomatoes</span>
+      <span>🥕 Organic Carrots</span>
+      <span>🌿 Leafy Greens</span>
+      <span>🍊 Juicy Oranges</span>
+      <span>🥬 Baby Spinach</span>
+      <span>🫑 Bell Peppers</span>
+      <span>🍋 Lemons</span>
+      <span>🌽 Sweet Corn</span>
+      <span>🥒 Cucumbers</span>
+      <span>🍇 Grapes</span>
+      <span>🍅 Fresh Tomatoes</span>
+      <span>🥕 Organic Carrots</span>
+      <span>🌿 Leafy Greens</span>
+      <span>🍊 Juicy Oranges</span>
+      <span>🥬 Baby Spinach</span>
+      <span>🫑 Bell Peppers</span>
+      <span>🍋 Lemons</span>
+      <span>🌽 Sweet Corn</span>
+      <span>🥒 Cucumbers</span>
+      <span>🍇 Grapes</span>
+    </div>
+  </div>
+<div class="marquee">
+  <div class="track">
+    
+    <span>🎉 50% OFF Fresh Vegetables</span>
+    <span>🚚 Free Delivery above ₹199</span>
+    <span>🌿 Organic Fruits Available</span>
+    <span>🔥 Mega Deals Live</span>
+    <span>🍎 Fresh Apples - 30% OFF</span>
+    <span>🍌 Organic Bananas</span>
+    <span>🍊 Sweet Oranges</span>
+    <span>🍇 Grapes Buy 1 Get 1</span>
+    <span>🍓 Strawberries Offer</span>
+
+    <!-- duplicate for continuous loop -->
+    <span>🎉 50% OFF Fresh Vegetables</span>
+    <span>🚚 Free Delivery above ₹199</span>
+    <span>🌿 Organic Fruits Available</span>
+    <span>🔥 Mega Deals Live</span>
+    <span>🍎 Fresh Apples - 30% OFF</span>
+    <span>🍌 Organic Bananas</span>
+    <span>🍊 Sweet Oranges</span>
+    <span>🍇 Grapes Buy 1 Get 1</span>
+    <span>🍓 Strawberries Offer</span>
+
+  </div>
+</div>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="section-header reveal">
+      <span class="section-label">Why Choose Us</span>
+      <h2 class="section-title">Everything You Need in One Place</h2>
+      <p class="section-subtitle">We make healthy eating easy with farm-fresh produce, transparent sourcing, and lightning-fast delivery.</p>
+    </div>
+    <div class="features-grid stagger-children reveal">
+      <div class="feature-card">
+        <div class="feature-icon green-bg">🌱</div>
+        <h3>100% Organic</h3>
+        <p>Chemical-free produce grown with sustainable farming methods</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange-bg">🍅</div>
+        <h3>Farm Fresh Daily</h3>
+        <p>Harvested every morning and delivered within hours</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon pink-bg">🚀</div>
+        <h3>24hr Delivery</h3>
+        <p>From the farm to your doorstep in under 24 hours</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple-bg">👨‍🌾</div>
+        <h3>Verified Farmers</h3>
+        <p>Every seller is verified for quality and authenticity</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="section" style="background: var(--bg-color);" id="categories">
+    <div class="section-header reveal">
+      <span class="section-label">Shop by Category</span>
+      <h2 class="section-title">Explore Our Fresh Collection</h2>
+      <p class="section-subtitle">From leafy greens to exotic fruits — browse our handpicked categories.</p>
+    </div>
+    <div class="categories-grid stagger-children reveal">
+      <a href="vegetables.html" class="category-card">
+        <div class="category-img-wrap">
+          <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=600&q=80')"></div>
+          <div class="category-overlay"></div>
+          <div class="category-emoji">🥕</div>
+        </div>
+        <div class="category-content">
+          <h3>Vegetables</h3>
+          <p>Farm-fresh tomatoes, potatoes, onions and more</p>
+          <span class="category-link">Explore Now →</span>
+        </div>
+      </a>
+      <a href="fruits.html" class="category-card">
+        <div class="category-img-wrap">
+          <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80')"></div>
+          <div class="category-overlay"></div>
+          <div class="category-emoji">🍊</div>
+        </div>
+        <div class="category-content">
+          <h3>Fruits</h3>
+          <p>Seasonal fruits bursting with natural sweetness</p>
+          <span class="category-link">Explore Now →</span>
+        </div>
+      </a>
+      <a href="leafygreens.html" class="category-card">
+        <div class="category-img-wrap">
+          <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80')"></div>
+          <div class="category-overlay"></div>
+          <div class="category-emoji">🥬</div>
+        </div>
+        <div class="category-content">
+          <h3>Leafy Greens</h3>
+          <p>Nutrient-rich spinach, lettuce, kale and herbs</p>
+          <span class="category-link">Explore Now →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section reveal">
+<section class="fresh-experience">
+    <div class="fresh-box">
+    <div class="fresh-icon">🌾</div>
+
+    <div class="fresh-content">
+        <h2>Growing Healthier Communities</h2>
+          <p>
+            We connect local farmers with families through fresh, sustainable,
+            and naturally grown produce. Every harvest supports farmers,
+            promotes healthy living, and brings nature closer to your table.
+        </p>
+         <div class="fresh-features">
+    <span>➜ 🚜 Direct From Farms</span>
+    <span>➜ 🥬 Farm Fresh</span>
+    <span>➜ 🌱 100% Natural</span>
+    <span>➜ 🍅 Organic Quality</span>
+    <span>➜ 💚 Healthy Living</span>
+    <span>➜ 🚚 Fast Delivery</span>
+</div>
+    </div>
+</div>
+</section>
+</section>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <div class="section-header reveal">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Three Simple Steps</h2>
+      <p class="section-subtitle">Getting fresh produce has never been this easy.</p>
+    </div>
+    <div class="steps-grid reveal stagger-children">
+      <div class="step-card">
+        <div class="step-number green">1</div>
+        <h3>Browse & Pick</h3>
+        <p>Explore categories or use voice search to find what you need</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number orange">2</div>
+        <h3>Add to Cart</h3>
+        <p>Select your items, choose quantities, and review your order</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number pink">3</div>
+        <h3>Get Delivered</h3>
+        <p>Fresh produce arrives at your doorstep within 24 hours</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section" style="background: var(--bg-color);" id="reviews">
+    <div class="section-header reveal">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">Loved by Thousands</h2>
+      <p class="section-subtitle">Hear what our customers have to say about their GreenHarvest experience.</p>
+    </div>
+    <div class="reviews-grid stagger-children reveal">
+      <div class="review-card">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150" class="user-img" alt="Sarah J.">
+        <div class="stars">★★★★★</div>
+        <p>"The tomatoes were so fresh and juicy! Tasted exactly like the ones from my grandmother's garden."</p>
+        <strong>— Sarah J.</strong>
+      </div>
+      <div class="review-card">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" class="user-img" alt="Mike T.">
+        <div class="stars">★★★★★</div>
+        <p>"Love the voice search feature. And knowing my money goes directly to local farmers makes it better."</p>
+        <strong>— Mike T.</strong>
+      </div>
+      <div class="review-card">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" class="user-img" alt="Emily R.">
+        <div class="stars">★★★★☆</div>
+        <p>"Fast delivery and the leafy greens weren't wilted at all. Best online produce shopping experience!"</p>
+        <strong>— Emily R.</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-card reveal">
+      <h2>Start Your Healthy Journey Today 🌿</h2>
+      <p>Join thousands of families who've switched to farm-fresh, chemical-free produce.</p>
+      <div class="cta-buttons">
+        <a href="register.html" class="btn btn-glow" style="font-size: 1.1rem; padding: 16px 40px;">Get Started Free</a>
+        <a href="about.html" class="btn btn-hero-outline" style="font-size: 1.1rem; padding: 16px 40px;">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>🌾 GreenHarvest</h4>
+        <p style="color: var(--text-light); margin-bottom:15px; line-height: 1.6;">Empowering local farmers and bringing organic health to your family. Fresh, natural, and sustainable.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="vegetables.html">Shop Vegetables</a></li>
+          <li><a href="fruits.html">Shop Fruits</a></li>
+          <li><a href="register.html?type=farmer">Become a Farmer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer</h4>
+        <ul>
+          <li><a href="cart.html">My Cart</a></li>
+          <li><a href="dashboard.html">My Dashboard</a></li>
+          <li><a href="login.html">Login / Register</a></li>
+          <li><a href="contact.html">Help & Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>📍 123 Agri Valley, Nature State</li>
+          <li>📞 +1 234 567 8900</li>
+          <li>✉️ support@greenharvest.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 GreenHarvest Marketplace. All Rights Reserved. Made with 💚
+    </div>
+  </footer>
+
+  <script src="js/darkmode.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/seed.js"></script>
+  
+  <script>
+    // Scroll-triggered reveal animations
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => observer.observe(el));
+    });
+    const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+document.addEventListener("DOMContentLoaded", function(){
+
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", function(){
+        navLinks.classList.toggle("show");
+    });
+
+});
+document.addEventListener("DOMContentLoaded", function () {
+
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+
+});
+let slides = document.querySelectorAll(".hero-slider .slide");
+let index = 0;
+
+function showNextSlide() {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+}
+
+setInterval(showNextSlide, 3000); // change every 3 s
+const themeToggle = document.getElementById("theme-toggle");
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    themeToggle.checked = true;
+}
+
+themeToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme","dark");
+    }else{
+        localStorage.setItem("theme","light");
+    }
+});
+
+  </script>
+</body>
+</html>

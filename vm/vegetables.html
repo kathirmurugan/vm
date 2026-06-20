@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegetables - GreenHarvest</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  .products-section {
+  padding: 50px 5%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+.view-more-container{
+    text-align:center;
+    margin:40px 0;
+}
+
+.view-more-btn{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    font-size:16px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.view-more-btn:hover{
+    background:#218838;
+    transform:translateY(-3px);
+}
+/* ----- FOOTER ----- */
+footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 60px 5% 30px;
+  margin-top: 0;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+}
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+.footer-col h4 {
+  margin-bottom: 18px;
+  color: var(--primary-color);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+.footer-col ul li {
+  margin-bottom: 12px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: color var(--transition-speed), padding-left var(--transition-speed);
+}
+.footer-col ul li:hover {
+  color: var(--primary-color);
+  padding-left: 5px;
+}
+.copyright {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ----- PRODUCT TABLES (shared) ----- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+.table th {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.table tr:hover {
+  background: rgba(46,125,50,0.04);
+}
+
+/* Products Section */
+.products-section{
+    padding:50px 5%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+    color:var(--primary-color);
+}
+
+/* ===== Product Carousel ===== */
+.slider-container{
+    position:relative;
+    width:100%;
+    padding:0 60px;
+    overflow:hidden;
+}
+
+.product-grid{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:25px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    padding:10px 0;
+}
+
+.product-grid::-webkit-scrollbar{
+    display:none;
+}
+
+.product-card{
+    min-width:300px;
+    max-width:300px;
+    flex:0 0 auto;
+}
+
+/* Arrow Buttons */
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:#28a745;
+    color:#fff;
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+    z-index:100;
+    transition:all .3s ease;
+    box-shadow:0 4px 10px rgba(8, 117, 35, 0.2);
+}
+
+.slider-btn:hover{
+    background:#218838;
+    transform:translateY(-50%) scale(1.1);
+}
+
+.left-btn{
+    left:0;
+}
+
+.right-btn{
+    right:0;
+}
+
+/* View More Button */
+.view-more-container{
+    text-align:center;
+    margin:40px 0;
+}
+
+.view-more-btn{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    font-size:16px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.view-more-btn:hover{
+    background:#218838;
+    transform:translateY(-3px);
+}
+/* ==========================
+   SECOND VEGETABLE SECTION
+========================== */
+
+.products-section{
+    padding:60px 5%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:32px;
+    font-weight:700;
+    color:#28a745;
+    margin-bottom:35px;
+}
+
+/* Slider Container */
+.slider-container{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    padding:0 60px;
+}
+
+/* Horizontal Product Scroll */
+.product-grid{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:25px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    padding:15px 0;
+}
+
+.product-grid::-webkit-scrollbar{
+    display:none;
+}
+
+/* Product Card */
+.product-card{
+    min-width:300px;
+    max-width:300px;
+    flex:0 0 auto;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:all .3s ease;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.product-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    margin-bottom:10px;
+    font-size:20px;
+    font-weight:600;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+    color:#28a745;
+    margin-bottom:8px;
+}
+
+.stock{
+   
+    margin-bottom:12px;
+}
+
+.benefits{
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:15px;
+    
+}
+
+/* Add To Cart Button */
+.add-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#28a745;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#218838;
+}
+
+/* Navigation Arrows */
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:#28a745;
+    color:#fff;
+    font-size:26px;
+    font-weight:bold;
+    cursor:pointer;
+    z-index:10;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    transition:.3s;
+}
+
+.slider-btn:hover{
+    background:#218838;
+    transform:translateY(-50%) scale(1.1);
+}
+
+.left-btn{
+    left:0;
+}
+
+.right-btn{
+    right:0;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    .slider-container{
+        padding:0 45px;
+    }
+
+    .product-card{
+        min-width:260px;
+        max-width:260px;
+    }
+
+    .product-img{
+        height:180px;
+    }
+
+    .slider-btn{
+        width:45px;
+        height:45px;
+        font-size:22px;
+    }
+
+    .section-title{
+        font-size:26px;
+    }
+}
+/* ==========================
+   📱 Mobile Phones (320px–480px)
+========================== */
+@media (max-width: 480px) {
+
+  
+  .page-header h1{
+    font-size: 28px;
+  }
+
+  .page-header p{
+    font-size: 14px;
+  }
+
+  .filters-bar{
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-box,
+  .sort-box{
+    width: 100%;
+  }
+
+  .slider-container{
+    padding: 0 35px;
+  }
+
+  .product-card{
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .product-img{
+    height: 170px;
+  }
+
+  .product-info h3{
+    font-size: 18px;
+  }
+
+  .price{
+    font-size: 18px;
+  }
+
+  .slider-btn{
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .footer-content{
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* ==========================
+   📱 Large Mobiles (481px–768px)
+========================== */
+@media (min-width: 481px) and (max-width: 768px){
+
+  
+
+  .filters-bar{
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .slider-container{
+    padding: 0 45px;
+  }
+
+  .product-card{
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+  .product-img{
+    height: 190px;
+  }
+
+  .footer-content{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* ==========================
+   💻 Tablets (769px–992px)
+========================== */
+@media (min-width: 769px) and (max-width: 992px){
+
+  .navbar{
+    padding: 15px 4%;
+  }
+
+  .product-card{
+    min-width: 280px;
+    max-width: 280px;
+  }
+
+  .product-img{
+    height: 210px;
+  }
+
+  .footer-content{
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .section-title{
+    font-size: 30px;
+  }
+}
+
+/* ==========================
+   🖥️ Desktop Screens (993px+)
+========================== */
+@media (min-width: 993px){
+
+  .product-card{
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .product-img{
+    height: 220px;
+  }
+
+  .footer-content{
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  .section-title{
+    font-size: 32px;
+  }
+}
+/* ===== RESPONSIVE NAVBAR ===== */
+
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 20px;
+    background:#fff;
+    position:relative;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.nav-brand h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#28a745;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+/* ===== Desktop ===== */
+@media (min-width:769px){
+    .menu-btn{
+        display:none;
+    }
+}
+/* ===== Tablet & Mobile ===== */
+@media (max-width:768px){
+
+    .navbar{
+        padding:10px 15px;
+    }
+
+    .nav-brand h2{
+        font-size:22px;
+    }
+
+    .menu-toggle{
+        display:block;
+        font-size:28px;
+    }
+
+    .nav-actions{
+        gap:6px;
+    }
+
+    .nav-actions .btn{
+        padding:6px 12px;
+        font-size:13px;
+    }
+
+    .nav-links{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#fff;
+        padding:20px 0;
+        gap:18px;
+        text-align:center;
+        box-shadow:0 5px 15px rgba(0,0,0,.1);
+        z-index:1000;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}
+
+/* ===== Small Mobile ===== */
+@media (max-width:480px){
+
+    .navbar{
+        padding:8px 10px;
+    }
+
+    .nav-brand h2{
+        font-size:18px;
+    }
+
+    .menu-toggle{
+        font-size:24px;
+    }
+
+    .nav-actions .btn{
+        padding:5px 10px;
+        font-size:12px;
+    }
+}
+/* ===== Desktop ===== */
+@media (min-width:769px){
+
+    .navbar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+    }
+
+    .nav-brand{
+        flex:1;
+    }
+
+    .nav-links{
+        display:flex !important;
+        justify-content:center;
+        align-items:center;
+        gap:25px;
+        flex:2;
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+
+    .nav-actions{
+        flex:1;
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        gap:10px;
+    }
+
+    .menu-toggle{
+        display:none;
+    }
+}
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    background:#fff;
+    position:relative;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#2e7d32;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+#themeToggle{
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.login-btn{
+    text-decoration:none;
+    background:#2e7d32;
+    color:#fff;
+    padding:8px 15px;
+    border-radius:8px;
+}
+
+.menu-btn{
+    font-size:28px;
+    cursor:pointer;
+    display:none;
+}
+
+/* Desktop Menu */
+.nav-links{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#fff;
+        flex-direction:column;
+        text-align:center;
+        padding:20px 0;
+        box-shadow:0 5px 10px rgba(0,0,0,.1);
+        gap:15px;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#2e7d32;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu-btn{
+    font-size:28px;
+    cursor:pointer;
+}
+
+#themeToggle{
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.login-btn{
+    text-decoration:none;
+    background:#2e7d32;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:8px;
+}
+/* Mobile 360px Fix */
+@media (max-width: 360px) {
+
+  .navbar{
+    padding:10px;
+  }
+
+  .logo{
+    font-size:14px;
+    white-space:nowrap;
+  }
+
+  .nav-right{
+    gap:4px;
+  }
+
+  .menu-btn{
+    font-size:18px;
+  }
+
+  #themeToggle{
+    font-size:16px;
+  }
+
+  .login-btn{
+    padding:4px 8px;
+    font-size:12px;
+  }
+
+}
+body.dark-mode{
+    background-color:#121212;
+    color:white;
+}
+
+body.dark-mode .navbar{
+    background-color:#1e1e1e;
+}
+
+body.dark-mode .nav-links a{
+    color:white;
+}
+
+body.dark-mode .dashboard-container{
+    background-color:#121212;
+}
+/* DARK MODE */
+
+body.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+body.dark-mode .product-card{
+    background:#1e1e1e;
+    color:white;
+    border:1px solid #333;
+}
+
+body.dark-mode .product-card h3,
+body.dark-mode .product-card p{
+    color:white;
+}
+
+body.dark-mode .product-info{
+    background:#222;
+}
+
+body.dark-mode .nutrition-box{
+    background:#2d2d2d;
+    color:#fff;
+}
+
+body.dark-mode .quantity-control{
+    background:#eeeded;
+}
+
+body.dark-mode .quantity-btn{
+    background:#333;
+    color:white;
+}
+
+body.dark-mode .quantity-input{
+    background:#fffefe;
+    color:white;
+    border:1px solid #444;
+}body.dark-mode .nutrition-box strong{
+    color:#4CAF50;
+}
+</style>
+<body>
+
+<nav class="navbar glass">
+
+    <div class="nav-brand">
+        <h2>🌾 GreenHarvest</h2>
+    </div>
+
+    <!-- Menu Button -->
+    <div class="menu-toggle" id="menuToggle">☰</div>
+
+    <!-- Right Side -->
+
+    <!-- Menu Links -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="vegetables.html">Vegetables</a></li>
+        <li><a href="fruits.html">Fruits</a></li>
+        <li><a href="leafygreens.html">Leafy Greens</a></li>
+        <li><a href="cart.html">Cart</a></li>
+    </ul>
+     <div class="nav-actions">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider">🌙</span>
+        </label>
+
+        <a href="login.html" class="btn btn-primary">Login</a>
+    </div>
+
+</nav>
+  <main class="product-page">
+    <div class="page-header animate-slide-up">
+      <h1>Fresh Vegetables</h1>
+      <p>Direct from the farm to your kitchen.</p>
+    </div>
+
+    <div class="filters-bar animate-fade-in">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search vegetables (e.g., Tomato)">
+        <button class="mic-btn" title="Search by Voice">🎤</button>
+      </div>
+      <div class="sort-box">
+        <select class="input-field" style="padding: 10px; border-radius: 8px;">
+          <option>Sort by: Default</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+<div class="slider-container">
+
+    <button class="slider-btn left-btn"
+            onclick="moveProducts(-1)">
+        ❮
+    </button>
+
+    <div class="product-grid" id="productGrid">
+      
+      <!-- Product 1 -->
+      <div class="product-card animate-fade-in">
+        <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80" alt="Tomato" class="product-img">
+        <div class="product-info">
+          <h3>Organic Tomato</h3>
+          <div class="price">₹40 / kg</div>
+          <div class="stock">In Stock: 50kg</div>
+          <div class="benefits">
+            <strong>Nutrition:</strong> Vit C, Potassium<br>
+            <strong>Benefits:</strong> Good for heart and skin.
+          </div>
+          <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card animate-fade-in" style="animation-delay: 0.1s">
+        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80" alt="Potato" class="product-img">
+        <div class="product-info">
+          <h3>Farm Fresh Potato</h3>
+          <div class="price">₹30 / kg</div>
+          <div class="stock">In Stock: 100kg</div>
+          <div class="benefits">
+            <strong>Nutrition:</strong> Carbs, Fiber<br>
+            <strong>Benefits:</strong> Energy boosting.
+          </div>
+          <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg2', -1)">-</button>
+              <input type="number" id="qty-veg2" value="1" min="1">
+              <button onclick="changeQty('veg2', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg2" onclick="addToCart('veg2', 'Farm Fresh Potato', 30, 'potato')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card animate-fade-in" style="animation-delay: 0.2s">
+        <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=400&q=80" alt="Onion" class="product-img">
+        <div class="product-info">
+          <h3>Red Onion</h3>
+          <div class="price">₹50 / kg</div>
+          <div class="stock">In Stock: 80kg</div>
+          <div class="benefits">
+            <strong>Nutrition:</strong> Antioxidants<br>
+            <strong>Benefits:</strong> Reduces inflammation.
+          </div>
+          <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg3', -1)">-</button>
+              <input type="number" id="qty-veg3" value="1" min="1">
+              <button onclick="changeQty('veg3', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg3" onclick="addToCart('veg3', 'Red Onion', 50, 'onion')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card animate-fade-in" style="animation-delay: 0.3s">
+        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&q=80" alt="Carrot" class="product-img">
+        <div class="product-info">
+          <h3>Crunchy Carrot</h3>
+          <div class="price">₹60 / kg</div>
+          <div class="stock">In Stock: 40kg</div>
+          <div class="benefits">
+            <strong>Nutrition:</strong> Vit A, Beta-carotene<br>
+            <strong>Benefits:</strong> Improves eyesight.
+          </div>
+          <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg4', -1)">-</button>
+              <input type="number" id="qty-veg4" value="1" min="1">
+              <button onclick="changeQty('veg4', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg4" onclick="addToCart('veg4', 'Crunchy Carrot', 60, 'carrot')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card animate-fade-in">
+  <img src="https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=400&q=80" alt="Cabbage" class="product-img">
+  <div class="product-info">
+    <h3>Organic Cabbage</h3>
+    <div class="price">₹35 / kg</div>
+    <div class="stock">In Stock: 70kg</div>
+    <div class="benefits">
+      <strong>Nutrition:</strong> Vitamin C, Fiber<br>
+      <strong>Benefits:</strong> Boosts immunity.
+    </div>
+    <div class="card-actions">
+      <div class="qty-control">
+        <button onclick="changeQty('veg6', -1)">-</button>
+        <input type="number" id="qty-veg6" value="1" min="1">
+        <button onclick="changeQty('veg6', 1)">+</button>
+      </div>
+      <button class="btn btn-primary add-btn" onclick="addToCart('veg6','Organic Cabbage',35,'cabbage')">Add to Cart</button>
+    </div>
+  </div>
+</div>
+<div class="product-card animate-fade-in">
+  <img src="https://images.unsplash.com/photo-1510627498534-cf7e9002facc?w=400&q=80" alt="Cauliflower" class="product-img">
+  <div class="product-info">
+    <h3>Fresh Cauliflower</h3>
+    <div class="price">₹55 / kg</div>
+    <div class="stock">In Stock: 50kg</div>
+    <div class="benefits">
+      <strong>Nutrition:</strong> Vitamin K, Fiber<br>
+      <strong>Benefits:</strong> Good for bones.
+    </div>
+    <div class="card-actions">
+      <div class="qty-control">
+        <button onclick="changeQty('veg7', -1)">-</button>
+        <input type="number" id="qty-veg7" value="1" min="1">
+        <button onclick="changeQty('veg7', 1)">+</button>
+      </div>
+      <button class="btn btn-primary add-btn" onclick="addToCart('veg7','Fresh Cauliflower',55,'cauliflower')">Add to Cart</button>
+    </div>
+  </div>
+</div>
+       <button class="slider-btn right-btn"
+            onclick="moveProducts(1)">
+        ❯
+    </button>
+    </div>
+  </div>
+</div>
+<!-- More Fresh Vegetables Section -->
+
+    <h2 class="section-title">🥕 More Fresh Vegetables</h2>
+
+    <div class="slider-container">
+
+        <button class="slider-btn left-btn"
+                onclick="moveProducts2(-1)">
+            ❮
+        </button>
+
+        <div class="product-grid" id="productGrid2">
+
+            <!-- Beetroot -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Fresh Beetroot</h3>
+                    <div class="price">₹45 / kg</div>
+                    <div class="stock">In Stock: 60kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Iron, Folate<br>
+                        <strong>Benefits:</strong> Improves blood circulation.
+                    </div>
+                    <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Radish -->
+            <div class="product-card animate-fade-in">
+              <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80" alt="Beetroot" class="product-img">
+                
+                <div class="product-info">
+                    <h3>Beet Root</h3>
+                    <div class="price">₹30 / kg</div>
+                    <div class="stock">In Stock: 50kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Vitamin C<br>
+                        <strong>Benefits:</strong> Supports digestion.
+                    </div>
+                   <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Ladies Finger -->
+            <div class="product-card animate-fade-in">
+               <img src="https://images.unsplash.com/photo-1628773822503-930a7eaecf80?w=400&q=80" alt="Ladies Finger" class="product-img">
+                <div class="product-info">
+                    <h3>Ladies Finger</h3>
+                    <div class="price">₹55 / kg</div>
+                    <div class="stock">In Stock: 70kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Fiber, Vitamin K<br>
+                        <strong>Benefits:</strong> Good for digestion.
+                    </div>
+                   <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Pumpkin -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Fresh Pumpkin</h3>
+                    <div class="price">₹35 / kg</div>
+                    <div class="stock">In Stock: 80kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Vitamin A<br>
+                        <strong>Benefits:</strong> Supports eye health.
+                    </div>
+                    <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Bitter Gourd -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Bitter Gourd</h3>
+                    <div class="price">₹60 / kg</div>
+                    <div class="stock">In Stock: 40kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Vitamin C<br>
+                        <strong>Benefits:</strong> Helps regulate sugar.
+                    </div>
+                    <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Bottle Gourd -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Bottle Gourd</h3>
+                    <div class="price">₹28 / kg</div>
+                    <div class="stock">In Stock: 90kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Water, Fiber<br>
+                        <strong>Benefits:</strong> Keeps body hydrated.
+                    </div>
+                   <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Green Peas -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Green Peas</h3>
+                    <div class="price">₹70 / kg</div>
+                    <div class="stock">In Stock: 50kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Protein, Fiber<br>
+                        <strong>Benefits:</strong> Supports muscle growth.
+                    </div>
+                   <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Beans -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Fresh Beans</h3>
+                    <div class="price">₹65 / kg</div>
+                    <div class="stock">In Stock: 55kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Fiber, Protein<br>
+                        <strong>Benefits:</strong> Good for heart health.
+                    </div>
+                    <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Cucumber -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Fresh Cucumber</h3>
+                    <div class="price">₹25 / kg</div>
+                    <div class="stock">In Stock: 100kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Water, Vitamin K<br>
+                        <strong>Benefits:</strong> Refreshes and hydrates.
+                    </div>
+                   <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+            <!-- Sweet Corn -->
+            <div class="product-card animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&q=80" class="product-img">
+                <div class="product-info">
+                    <h3>Sweet Corn</h3>
+                    <div class="price">₹80 / kg</div>
+                    <div class="stock">In Stock: 45kg</div>
+                    <div class="benefits">
+                        <strong>Nutrition:</strong> Carbs, Fiber<br>
+                        <strong>Benefits:</strong> Provides instant energy.
+                    </div>
+                    <div class="card-actions">
+            <div class="qty-control">
+              <button onclick="changeQty('veg1', -1)">-</button>
+              <input type="number" id="qty-veg1" value="1" min="1">
+              <button onclick="changeQty('veg1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary add-btn" id="btn-veg1" onclick="addToCart('veg1', 'Organic Tomato', 40, 'tomato')">Add to Cart</button>
+          </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="slider-btn right-btn"
+                onclick="moveProducts2(1)">
+            ❯
+        </button>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>🌾 GreenHarvest</h4>
+        <p style="color: var(--text-light); margin-bottom:15px; line-height: 1.6;">Empowering local farmers and bringing organic health to your family. Fresh, natural, and sustainable.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="vegetables.html">Shop Vegetables</a></li>
+          <li><a href="fruits.html">Shop Fruits</a></li>
+          <li><a href="register.html?type=farmer">Become a Farmer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer</h4>
+        <ul>
+          <li><a href="cart.html">My Cart</a></li>
+          <li><a href="dashboard.html">My Dashboard</a></li>
+          <li><a href="login.html">Login / Register</a></li>
+          <li><a href="contact.html">Help & Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>📍 123 Agri Valley, Nature State</li>
+          <li>📞 +1 234 567 8900</li>
+          <li>✉️ support@greenharvest.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 GreenHarvest Marketplace. All Rights Reserved. Made with 💚
+    </div>
+  </footer>
+  <!-- Voice Popup -->
+  <div class="voice-popup" id="voicePopup">
+    <div class="voice-waves">
+      <div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div>
+    </div>
+    <span>Listening...</span>
+  </div>
+<script>
+  function getProductsByCategory(category) {
+  const products = JSON.parse(localStorage.getItem("farmer_products")) || [];
+  return products.filter(p => p.category === category);
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const products = getProductsByCategory("vegetables");
+  renderProducts(products);
+});
+
+function getProductsByCategory(category) {
+    const products = JSON.parse(localStorage.getItem("farmer_products")) || [];
+    return products.filter(
+        p => p.category &&
+        p.category.toLowerCase() === category.toLowerCase()
+    );
+}
+
+function renderProducts(products) {
+    const container = document.getElementById("productGrid");
+
+    if (!container) return;
+
+    if (products.length === 0) {
+        container.innerHTML = `
+            <p style="text-align:center;width:100%;">
+                No vegetables available.
+            </p>
+        `;
+        return;
+    }
+
+    container.innerHTML = products.map(product => `
+        <div class="product-card animate-fade-in">
+            <img src="${product.image || 'https://via.placeholder.com/300'}"
+                 class="product-img"
+                 alt="${product.name}">
+
+            <div class="product-info">
+                <h3>${product.name}</h3>
+
+                <div class="price">
+                    ₹${product.price} / kg
+                </div>
+
+                <div class="stock">
+                    In Stock: ${product.quantity || 0} kg
+                </div>
+
+                <div class="benefits">
+                    ${product.description || 'Fresh farm product'}
+                </div>
+
+                <button class="btn btn-primary"
+                    onclick="addToCart(
+                        '${product.id}',
+                        '${product.name}',
+                        ${product.price},
+                        '${product.image}'
+                    )">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const products = getProductsByCategory("vegetables");
+    renderProducts(products);
+});
+
+
+function goToMoreProducts() {
+    window.location.href = "vegetables-more.html";
+}
+
+function moveProducts(direction){
+    const slider = document.getElementById("productGrid");
+
+    slider.scrollBy({
+        left: direction * 325,
+        behavior: "smooth"
+    });
+}
+
+function moveProducts2(direction){
+    const slider = document.getElementById("productGrid2");
+
+    slider.scrollBy({
+        left: direction * 325,
+        behavior: "smooth"
+    });
+}
+ const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+  const themeToggle = document.getElementById("theme-toggle");
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    themeToggle.checked = true;
+}
+
+themeToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme","dark");
+    }else{
+        localStorage.setItem("theme","light");
+    }
+});
+
+</script>
+
+  <script src="js/darkmode.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/voice.js"></script>
+  <script>window.CURRENT_CATEGORY = 'vegetables';</script>
+  <script src="js/tamil-dictionary.js"></script>
+   <script src="js/farmer-products.js"></script>
+    <script src="js/Common UI Render Function.js"></script>
+</body>
+</html>

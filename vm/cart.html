@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - GreenHarvest</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .cart-container { padding: 100px 5% 50px; min-height: 80vh; }
+    .cart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+    
+    .cart-items { background: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+    .cart-item:last-child { border-bottom: none; }
+    
+    .cart-item-info { display: flex; align-items: center; gap: 15px; }
+    .cart-item-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; background: #eee; }
+    
+    .qty-control { display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+    .qty-control button { background: var(--bg-color); border: none; width: 30px; height: 35px; cursor: pointer; color: var(--text-color); }
+    .qty-control input { width: 40px; height: 35px; text-align: center; border: none; background: transparent; color: var(--text-color); }
+    
+    .remove-btn { color: red; cursor: pointer; border: none; background: transparent; font-weight: bold; }
+    
+    .cart-summary { background: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-light); }
+    .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: bold; color: var(--text-color); }
+    
+    .empty-cart { text-align: center; padding: 50px; color: var(--text-light); }
+    
+    @media (max-width: 768px) {
+      .cart-grid { grid-template-columns: 1fr; }
+      .cart-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .cart-item-actions { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+    }
+    .toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: 0.3s;
+}
+.toast.show {
+  opacity: 1;
+}.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 5%;
+  flex-wrap:wrap;
+}
+
+/* RIGHT SIDE (Login + ☰ + 🌙) */
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* MENU DESKTOP */
+.nav-links{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* 📱 MOBILE */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  /* TOP BAR ALIGNMENT */
+  .navbar{
+    justify-content:space-between;
+  }
+
+  /* HIDDEN MENU */
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:70px;
+    left:0;
+    right:0;
+    background:white;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+
+/* 📱 320px–480px */
+@media(max-width:480px){
+  .nav-brand h2{
+    font-size:18px;
+  }
+
+  .btn{
+    padding:6px 10px;
+    font-size:12px;
+  }
+}
+
+/* 📱 481px–768px */
+@media(min-width:481px) and (max-width:768px){
+  .nav-brand h2{
+    font-size:20px;
+  }
+}
+
+/* 💻 769px–992px */
+@media(min-width:769px) and (max-width:992px){
+  .nav-brand h2{
+    font-size:22px;
+  }
+}
+
+/* 🖥️ 993px+ */
+@media(min-width:993px){
+  .nav-brand h2{
+    font-size:24px;
+  }
+}
+/* ===== THEME VARIABLES ===== */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #0c0c0c;
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --primary-color: #2e7d32;
+}
+
+/* DARK MODE */
+body.dark {
+  --bg-color: #121212;
+  --text-color: #0dc016;
+  --nav-bg: rgba(20, 20, 20, 0.9);
+  --primary-color: #66bb6a;
+}
+
+/* APPLY VARIABLES */
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.3s ease;
+}
+
+/* NAVBAR */
+.navbar.glass {
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* BUTTON */
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}.switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  width: 45px;
+  height: 22px;
+  background: #cccccc;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.switch input:checked + .slider {
+  background: var(--primary-color);
+}
+.navbar {
+    display: flex;
+    align-items: center;
+        text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    margin: 0 auto;
+        text-decoration: none;
+    color: inherit;
+}
+
+.nav-right {
+    margin-left: auto;
+}.nav-links{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: pop 0.3s ease;
+}
+
+.modal-box input,
+.modal-box textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.modal-box button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #2e7d32;
+  color: white;
+  font-weight: bold;
+}
+
+.modal-box .cancel {
+  background: red;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* Desktop */
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+/* Hide hamburger on desktop */
+.menu-toggle{
+    display:none;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .menu-toggle{
+        display:block;
+        font-size:28px;
+        cursor:pointer;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        text-align:center;
+        padding:15px 0;
+        box-shadow:0 5px 15px rgba(0,0,0,.1);
+        z-index:999;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}@media (max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        transform:none;
+        width:100%;
+        flex-direction:column;
+        background:white;
+        text-align:center;
+        padding:15px 0;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}.nav-links li a{
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+.nav-icons{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.theme-toggle{
+    width:55px;
+    height:30px;
+    border-radius:50px;
+    background:#cfcfcf;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.theme-toggle i{
+    font-size:30px; /* Moon size */
+    color:#f5b301;
+}
+
+.cart-icon{
+    font-size:24px; /* Cart size */
+    color:#2e7d32;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+<nav class="navbar glass">
+  
+  <div class="nav-brand">
+    <h2>🌾 GreenHarvest</h2>
+  </div>
+
+  <!-- ☰ MENU BUTTON -->
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <!-- NAV LINKS -->
+ <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="vegetables.html">Vegetables</a></li>
+    <li><a href="fruits.html">Fruits</a></li>
+    <li><a href="leafygreens.html" >Leafy Greens</a></li>
+    <li><a href="cart.html">Cart</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider">🌙</span>
+       <a href="cart.html" class="cart-icon">🛒</a>
+    </label>
+
+  </div>
+
+</nav>
+
+  <div class="cart-container animate-fade-in">
+    <h1 style="color: var(--primary-color); margin-bottom: 30px;">Shopping Cart</h1>
+    
+    <div class="cart-grid">
+      <div class="cart-items" id="cartItemsContainer">
+        <!-- JS will populate this -->
+      </div>
+      
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div style="margin-top:20px;">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>GST (5%)</span>
+            <span id="tax">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery</span>
+            <span style="color:var(--primary-color)">Free</span>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="total">₹0</span>
+          </div>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 25px; padding: 15px; font-size: 1.1rem;" onclick="checkout()">Proceed to Checkout</button>
+          
+       <div id="trackingBox" style="display:none;" class="cart-summary">
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="trackingBox" style="display:none; margin-top:30px;" class="cart-summary">
+  <h3>📦 Order Tracking</h3>
+
+  <p>Order ID: <span id="orderId"></span></p>
+
+  <div class="steps" style="margin-top:15px; line-height:2;">
+    <div id="step1">🟡 Order Placed</div>
+    <div id="step2">⚪ Packed</div>
+    <div id="step3">⚪ Shipped</div>
+    <div id="step4">⚪ Delivered</div>
+  </div>
+</div>
+<div id="addressModal" class="modal">
+  <div class="modal-box">
+    <h2>📍 Delivery Address</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <textarea id="address" placeholder="Full Address"></textarea>
+<button onclick="confirmOrder()">Confirm Order</button>
+<button class="cancel"
+onclick="document.getElementById('addressModal').style.display='none'">
+    Cancel
+</button>
+  </div>
+</div>
+  <script src="js/darkmode.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <script>
+    // Cart Page Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderCart = () => {
+        const cart = JSON.parse(localStorage.getItem('greenharvest_cart')) || [];
+        const container = document.getElementById('cartItemsContainer');
+        
+        if (cart.length === 0) {
+          container.innerHTML = `
+            <div class="empty-cart">
+              <h2 style="margin-bottom:15px">Your cart is empty</h2>
+              <a href="vegetables.html" class="btn btn-primary">Start Shopping</a>
+            </div>
+          `;
+          document.getElementById('subtotal').innerText = '₹0';
+          document.getElementById('tax').innerText = '₹0';
+          document.getElementById('total').innerText = '₹0';
+          return;
+        }
+
+        let html = '';
+        let subtotal = 0;
+        
+        cart.forEach(item => {
+          subtotal += item.price * item.qty;
+          html += `
+            <div class="cart-item animate-slide-left">
+              <div class="cart-item-info">
+                <div class="cart-item-img" style="display:flex; align-items:center; justify-content:center; font-size:2rem; background:var(--bg-color)">
+                  ${item.name.includes('Tomato') ? '🍅' : (item.name.includes('Potato') ? '🥔' : '🧅')}
+                </div>
+                <div>
+                  <h4 style="margin-bottom:5px">${item.name}</h4>
+                  <p style="color:var(--primary-color); font-weight:bold">₹${item.price}/kg</p>
+                </div>
+              </div>
+              <div class="cart-item-actions">
+                <div class="qty-control">
+                  <button onclick="updateItemQty('${item.id}', -1)">-</button>
+                  <input type="number" value="${item.qty}" readonly>
+                  <button onclick="updateItemQty('${item.id}', 1)">+</button>
+                </div>
+                <div style="font-weight:bold; margin: 0 20px;">₹${item.price * item.qty}</div>
+                <button class="remove-btn" onclick="removeItem('${item.id}')">Remove</button>
+              </div>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = html;
+        
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+        
+        document.getElementById('subtotal').innerText = `₹${subtotal}`;
+        document.getElementById('tax').innerText = `₹${tax.toFixed(2)}`;
+        document.getElementById('total').innerText = `₹${total.toFixed(2)}`;
+      };
+
+      window.updateItemQty = (id, delta) => {
+        let cart = JSON.parse(localStorage.getItem('greenharvest_cart')) || [];
+        const item = cart.find(x => x.id === id);
+        if (item) {
+          item.qty += delta;
+          if (item.qty < 1) item.qty = 1;
+          localStorage.setItem('greenharvest_cart', JSON.stringify(cart));
+          renderCart();
+        }
+      };
+
+      window.removeItem = (id) => {
+        let cart = JSON.parse(localStorage.getItem('greenharvest_cart')) || [];
+        cart = cart.filter(x => x.id !== id);
+        localStorage.setItem('greenharvest_cart', JSON.stringify(cart));
+        renderCart();
+      };
+
+      renderCart();
+    });
+window.checkout = () => {
+  const cart = JSON.parse(localStorage.getItem('greenharvest_cart')) || [];
+
+  if (cart.length === 0) {
+    showToast("🛒 Cart is empty!");
+    return;
+  }
+
+  const address = prompt("📍 Enter your delivery address:");
+
+  if (!address) {
+    showToast("❌ Checkout cancelled");
+    return;
+  }
+
+  showToast("⏳ Processing order...");
+
+  setTimeout(() => {
+    const orderId = "GH" + Date.now();
+
+    localStorage.removeItem('greenharvest_cart');
+    renderCart();
+
+    // SHOW TRACKING BOX
+    document.getElementById("trackingBox").style.display = "block";
+    document.getElementById("orderId").innerText = orderId;
+
+    // RESET STEPS
+    document.getElementById("step1").innerText = "🟢 Order Placed";
+    document.getElementById("step2").innerText = "⚪ Packed";
+    document.getElementById("step3").innerText = "⚪ Shipped";
+    document.getElementById("step4").innerText = "⚪ Delivered";
+
+    startTracking();
+
+  }, 1500);
+};
+
+
+function startTracking() {
+  setTimeout(() => {
+    document.getElementById("step2").innerText = "🟢 Packed";
+  }, 2000);
+
+  setTimeout(() => {
+    document.getElementById("step3").innerText = "🟢 Shipped";
+  }, 4000);
+
+  setTimeout(() => {
+    document.getElementById("step4").innerText = "🟢 Delivered";
+    showToast("🎉 Order Delivered Successfully!");
+  }, 6000);
+}
+
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerText = message;
+
+  toast.style.position = "fixed";
+  toast.style.bottom = "20px";
+  toast.style.right = "20px";
+  toast.style.background = "#2e7d32";
+  toast.style.color = "white";
+  toast.style.padding = "12px 18px";
+  toast.style.borderRadius = "10px";
+  toast.style.zIndex = "9999";
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+}
+
+function confirmOrder() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+
+  if (!name || !phone || !address) {
+    showToast("❌ Please fill all fields");
+    return;
+  }
+
+  showToast("⏳ Processing order...");
+
+  setTimeout(() => {
+    const orderId = "GH" + Date.now();
+
+    localStorage.removeItem('greenharvest_cart');
+    renderCart();
+
+    document.getElementById("trackingBox").style.display = "block";
+    document.getElementById("orderId").innerText = orderId;
+
+    startTracking();
+
+  function closeModal() {
+  document.getElementById("addressModal").style.display = "none";
+}
+    showToast("✅ Order Placed Successfully!");
+  }, 1500);
+}
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+// close menu when clicking link (mobile UX)
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+  });
+});
+const toggle = document.getElementById("theme-toggle");
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+  toggle.checked = true;
+}
+
+// Toggle theme
+toggle.addEventListener("change", () => {
+  if (toggle.checked) {
+    document.body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
+});
+window.checkout = () => {
+  const cart = JSON.parse(localStorage.getItem('greenharvest_cart')) || [];
+
+  if (cart.length === 0) {
+    showToast("🛒 Cart is empty!");
+    return;
+  }
+
+  // SHOW MODAL instead of prompt
+  document.getElementById("addressModal").style.display = "flex";
+};
+  </script>
+</body>
+</html>
